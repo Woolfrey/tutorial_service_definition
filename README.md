@@ -54,6 +54,18 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 ```
 colcon build --packages-select tutorial_service_definition
 ```
+7) Check:
+```
+ros2 interface show tutorial_service_definition/srv/Haiku
+```
+You should see:
+```
+# Request
+int64 line_number
+---
+# Response
+string line
+```
 
 
 
