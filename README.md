@@ -93,5 +93,5 @@ ros2 interface show tutorial_service_definition/srv/Haiku
 
 This service can now be used within other ROS2 nodes.
 
-:arrow_backward: [Go back.](##ros2-tutorial-21-service-definition)
+:arrow_backward: [Go back.](#ros2-tutorial-21-service-definition)
 
