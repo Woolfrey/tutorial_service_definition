@@ -35,7 +35,6 @@ The service and client model is more like sending a letter directly to someone, 
 
 <img src="https://github.com/Woolfrey/tutorial_service_definition/assets/62581255/6fa5991a-1272-4ddd-960a-dee4ec8a3217" alt="img" width="500" height="auto">
 
-
 ## Defining A Service
 
 Be sure to source ROS2 if it is not already included in your `.bashrc` file:
@@ -43,17 +42,19 @@ Be sure to source ROS2 if it is not already included in your `.bashrc` file:
 source /opt/ros/humble/setup.bash
 ```
 
-1) Create the package:
+1) In your ROS2 workspace source folder `<workspace_directory>/src` create a new package with the following command:
 ```
 ros2 pkg create --build-type ament_cmake tutorial_service_definition  --dependencies rclcpp
 ```
-2) 
+2) Navigate inside the newly created directory, make a folder named `srv`, navigate inside that, and create a new service defintion named `Haiku.srv`:
 ```
-cd src/tutorial_service_definition
+cd tutorial_service_definition
 mkdir srv && cd srv
 gedit Haiku.srv
 ```
-3) Add the following:
+(I use `gedit`, but you could also use `nano` or your preferred IDE).
+
+3) Inside the `Haiku.srv` file, insert the following and save it:
 ```
 # Request
 int64 line_number
@@ -68,7 +69,7 @@ find_package(rosidl_default_generators REQUIRED)                                
 rosidl_generate_interfaces(${PROJECT_NAME}
                            "srv/Haiku.srv")
 ```
-5) Modify `package.xml` with the following:
+5) Modify the `package.xml` with the following:
 ```
 <build_depend>rosidl_default_generators</build_depend>
 
@@ -76,22 +77,20 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 
 <member_of_group>rosidl_interface_packages</member_of_group>
 ```
-6) Navigate back to root of workspace and build:
+6) Navigate back to root of your ROS2 workspace and build the newly created package:
 ```
 colcon build --packages-select tutorial_service_definition
 ```
-7) Check:
+7) Make sure to re-source so that ROS2 can find the new package:
+```
+source ./install.setup.bash
+```
+8) If successful, you should be able to view the definition by calling:
 ```
 ros2 interface show tutorial_service_definition/srv/Haiku
 ```
-You should see:
-```
-# Request
-int64 line_number
----
-# Response
-string line
-```
+<img src="https://github.com/Woolfrey/tutorial_service_definition/assets/62581255/5e181c05-0ac1-430c-bad8-3fe68e9afcb7" alt="image" width="900" height="auto">
 
+This service can now be used within other ROS2 nodes.
 
 
